@@ -8,41 +8,33 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.world.WorldType;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 public class GuiCreateCustomWorld extends GuiCreateWorld {
     public GuiCreateCustomWorld(GuiScreen screen) {
         super(screen);
-    }
-
-    @Override
-    public void initGui() {
-        super.initGui();
-
         try {
+            //The world type to generate
             Field field_146331_K = GuiCreateWorld.class.getDeclaredField("field_146331_K");
             field_146331_K.setAccessible(true);
 
-            Method func_146319_h = GuiCreateWorld.class.getDeclaredMethod("func_146319_h");
-            func_146319_h.setAccessible(true);
-
             this.field_146334_a = "";
 
-            int WorldGenerator = 0;
-
-            for (int i = 0; i < WorldType.worldTypes.length; i++) {
-                if (WorldType.worldTypes[i] != null && WorldType.worldTypes[i].getCanBeCreated()) {
-                    if (WorldType.worldTypes[i].getWorldTypeName().equalsIgnoreCase(ConfigGeneralSettings.generalWorldGenerator)) {
-                        WorldGenerator = WorldType.worldTypes[i].getWorldTypeID();
-                        Log.info("Changed world type to " + WorldType.worldTypes[i].getTranslateName());
+            int worldGenType = 0;
+            //Find all valid world gen types
+            for (WorldType worldType : WorldType.worldTypes) {
+                if (worldType != null && worldType.getCanBeCreated()) {
+                    //Default world type query
+                    if (worldType.getWorldTypeName().equalsIgnoreCase(ConfigGeneralSettings.generalWorldGenerator)) {
+                        worldGenType = worldType.getWorldTypeID();
+//                        Log.debug("Changed world type to " + worldType.getTranslateName());
                     }
-
-                    if (WorldType.worldTypes[i].getWorldTypeName().equalsIgnoreCase("flat")) {
-                        String flatworldconfig = "";
+                    //Superflat world type...
+                    if (worldType.getWorldTypeName().equalsIgnoreCase("flat")) {
+                        StringBuilder flatworldconfig = new StringBuilder();
                         for (int j = 0; j < ConfigGeneralSettings.generalFlatWorldConfig.length; j++) {
-                            String tmp[] = ConfigGeneralSettings.generalFlatWorldConfig[j].split(" ");
+                            String[] tmp = ConfigGeneralSettings.generalFlatWorldConfig[j].split(" ");
                             if (tmp.length == 1) {
-                                flatworldconfig += tmp[0];
+                                flatworldconfig.append(tmp[0]);
                             } else {
                                 String blockName = tmp[1];
                                 int blockQty = Integer.parseInt(tmp[0]);
@@ -57,40 +49,33 @@ public class GuiCreateCustomWorld extends GuiCreateWorld {
                                     Log.fatal(blockName + " not found, please check the config file...");
                                 } else {
 
-                                    flatworldconfig += blockQty + "x" + blockID;
+                                    flatworldconfig.append(blockQty)
+                                                   .append("x")
+                                                   .append(blockID);
                                     if (blockMeta != 0) {
-                                        flatworldconfig += ":" + blockMeta;
+                                        flatworldconfig.append(":")
+                                                       .append(blockMeta);
                                     }
                                 }
                             }
                             if (j != ConfigGeneralSettings.generalFlatWorldConfig.length - 1) {
-                                if (!flatworldconfig.endsWith(";")) {
-                                    flatworldconfig += ",";
+                                if (!flatworldconfig.toString().endsWith(";")) {
+                                    flatworldconfig.append(",");
                                 }
                             }
                         }
-                        this.field_146334_a = flatworldconfig;
+                        //Set preset
+                        this.field_146334_a = flatworldconfig.toString();
                     }
                 }
             }
+            //Update GUI
+            field_146331_K.setInt(this, worldGenType);
 
-
-            field_146331_K.setInt(this, WorldGenerator);
-
-            Field field_146344_y = GuiCreateWorld.class.getDeclaredField("field_146344_y");
-            field_146344_y.setAccessible(true);
-
-
-            func_146319_h.invoke(this);
-
-            if (ConfigGeneralSettings.generalLockWorldGenerator) {
-
-            }
-
-        } catch (Exception ex) {
+        } catch(Exception ex) {
             Log.fatal("Fatal Error:");
             Log.fatal(ex);
         }
-
     }
+
 }

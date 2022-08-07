@@ -125,13 +125,5 @@ artifacts {
     archives deobfJar
 }
 
-curse {
-    apiKey = project.fireball1725curse
-    projectId = "226188"
-    changelog = file("build/libs/changelog.txt").text
-    releaseType = "release"
-    addGameVersion "1.7.10"
-}
-
 build.dependsOn sourceJar
 
