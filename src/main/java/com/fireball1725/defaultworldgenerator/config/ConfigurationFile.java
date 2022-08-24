@@ -7,7 +7,7 @@ import net.minecraftforge.common.config.Configuration;
 public class ConfigurationFile {
     public static Configuration configuration;
 
-    private static String[] defaultFlatWorldConfig = {
+    private static final String[] defaultFlatWorldConfig = {
         "2;", "1 minecraft:bedrock", "52 minecraft:sandstone", "1 minecraft:dirt 2", ";2;", "biome_1", "village"
     };
 
