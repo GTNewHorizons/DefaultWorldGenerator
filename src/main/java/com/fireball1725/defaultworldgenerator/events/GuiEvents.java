@@ -2,14 +2,11 @@ package com.fireball1725.defaultworldgenerator.events;
 
 import com.fireball1725.defaultworldgenerator.config.ConfigGeneralSettings;
 import com.fireball1725.defaultworldgenerator.gui.GuiCreateCustomWorld;
-import com.fireball1725.defaultworldgenerator.lib.Log;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.GuiSelectWorld;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiScreenEvent;
 
 public class GuiEvents {
@@ -33,6 +30,6 @@ public class GuiEvents {
             }
         }
 
-        //Log.error(event.button.id + " - " + event.gui.toString());
+        // Log.error(event.button.id + " - " + event.gui.toString());
     }
 }
