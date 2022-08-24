@@ -1,5 +1,6 @@
 package com.fireball1725.defaultworldgenerator.lib;
 
+import com.fireball1725.defaultworldgenerator.Reference;
 import cpw.mods.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
