@@ -1,14 +1,17 @@
 package com.fireball1725.defaultworldgenerator.gui;
 
-import com.fireball1725.defaultworldgenerator.config.ConfigGeneralSettings;
-import com.fireball1725.defaultworldgenerator.lib.Log;
 import java.lang.reflect.Field;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.world.WorldType;
 
+import com.fireball1725.defaultworldgenerator.config.ConfigGeneralSettings;
+import com.fireball1725.defaultworldgenerator.lib.Log;
+
 public class GuiCreateCustomWorld extends GuiCreateWorld {
+
     public GuiCreateCustomWorld(GuiScreen screen) {
         super(screen);
         try {
@@ -25,7 +28,7 @@ public class GuiCreateCustomWorld extends GuiCreateWorld {
                     // Default world type query
                     if (worldType.getWorldTypeName().equalsIgnoreCase(ConfigGeneralSettings.generalWorldGenerator)) {
                         worldGenType = worldType.getWorldTypeID();
-                        //                        Log.debug("Changed world type to " + worldType.getTranslateName());
+                        // Log.debug("Changed world type to " + worldType.getTranslateName());
                     }
                     // Superflat world type...
                     if (worldType.getWorldTypeName().equalsIgnoreCase("flat")) {

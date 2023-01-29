@@ -1,15 +1,18 @@
 package com.fireball1725.defaultworldgenerator.events;
 
-import com.fireball1725.defaultworldgenerator.config.ConfigGeneralSettings;
-import com.fireball1725.defaultworldgenerator.gui.GuiCreateCustomWorld;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.client.gui.GuiSelectWorld;
 import net.minecraftforge.client.event.GuiScreenEvent;
 
+import com.fireball1725.defaultworldgenerator.config.ConfigGeneralSettings;
+import com.fireball1725.defaultworldgenerator.gui.GuiCreateCustomWorld;
+
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
 public class GuiEvents {
+
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onButtonClickPre(GuiScreenEvent.ActionPerformedEvent.Pre event) {
         if (event.gui instanceof GuiSelectWorld) {

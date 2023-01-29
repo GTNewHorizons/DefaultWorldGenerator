@@ -1,15 +1,17 @@
 package com.fireball1725.defaultworldgenerator.config;
 
-import com.fireball1725.defaultworldgenerator.helper.ConfigurationHelper;
 import java.io.File;
+
 import net.minecraftforge.common.config.Configuration;
 
+import com.fireball1725.defaultworldgenerator.helper.ConfigurationHelper;
+
 public class ConfigurationFile {
+
     public static Configuration configuration;
 
-    private static final String[] defaultFlatWorldConfig = {
-        "2;", "1 minecraft:bedrock", "52 minecraft:sandstone", "1 minecraft:dirt 2", ";2;", "biome_1", "village"
-    };
+    private static final String[] defaultFlatWorldConfig = { "2;", "1 minecraft:bedrock", "52 minecraft:sandstone",
+            "1 minecraft:dirt 2", ";2;", "biome_1", "village" };
 
     public static Configuration init(File configFile) {
         if (configuration == null) {

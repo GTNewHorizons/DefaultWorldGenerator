@@ -1,10 +1,12 @@
 package com.fireball1725.defaultworldgenerator.lib;
 
-import com.fireball1725.defaultworldgenerator.Reference;
-import cpw.mods.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
 
+import com.fireball1725.defaultworldgenerator.Reference;
+import cpw.mods.fml.common.FMLLog;
+
 public class Log {
+
     public static void log(Level logLevel, Object object) {
         FMLLog.log(Reference.MOD_NAME, logLevel, String.valueOf(object));
     }
