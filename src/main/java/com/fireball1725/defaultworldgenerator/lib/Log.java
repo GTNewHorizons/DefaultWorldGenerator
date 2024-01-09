@@ -3,6 +3,7 @@ package com.fireball1725.defaultworldgenerator.lib;
 import org.apache.logging.log4j.Level;
 
 import com.fireball1725.defaultworldgenerator.Reference;
+
 import cpw.mods.fml.common.FMLLog;
 
 public class Log {
