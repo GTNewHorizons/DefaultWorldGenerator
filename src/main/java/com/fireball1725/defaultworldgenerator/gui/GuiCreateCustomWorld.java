@@ -21,12 +21,14 @@ public class GuiCreateCustomWorld extends GuiCreateWorld {
 
             this.field_146334_a = "";
 
-            int worldGenType = 0;
+            int worldGenType = -1;
             // Find all valid world gen types
             for (WorldType worldType : WorldType.worldTypes) {
                 if (worldType != null && worldType.getCanBeCreated()) {
                     // Default world type query
-                    if (worldType.getWorldTypeName().equalsIgnoreCase(ConfigGeneralSettings.generalWorldGenerator)) {
+                    if (ConfigGeneralSettings.isWorldGeneratorAllowed(worldType.getWorldTypeName())
+                            && (worldGenType == -1 || worldType.getWorldTypeName()
+                                    .equalsIgnoreCase(ConfigGeneralSettings.generalWorldGenerator))) {
                         worldGenType = worldType.getWorldTypeID();
                         // Log.debug("Changed world type to " + worldType.getTranslateName());
                     }
@@ -69,6 +71,11 @@ public class GuiCreateCustomWorld extends GuiCreateWorld {
                 }
             }
             // Update GUI
+            if (worldGenType == -1) {
+                Log.warn(
+                        "No whitelisted world generator is available. Hold Alt while clicking to select another generator.");
+                worldGenType = WorldType.DEFAULT.getWorldTypeID();
+            }
             field_146331_K.setInt(this, worldGenType);
 
         } catch (Exception ex) {
