@@ -35,12 +35,15 @@ public class ConfigurationFile {
                 "general",
                 false,
                 "Enabling this will display all world generators installed, useful for debug");
-        ConfigGeneralSettings.generalLockWorldGenerator = ConfigurationHelper.getBoolean(
+        boolean lockWorldGenerator = configuration.hasKey("general", "Lock World Generator")
+                && configuration.get("general", "Lock World Generator", false).getBoolean(false);
+        ConfigGeneralSettings.generalWorldGeneratorWhitelist = ConfigurationHelper.getString(
                 configuration,
-                "Lock World Generator",
+                "World Generator Whitelist",
                 "general",
-                false,
-                "Enable this to lock world generator to one specified");
+                lockWorldGenerator ? new String[] { ConfigGeneralSettings.generalWorldGenerator } : new String[0],
+                "Allowed world generators. Leave empty to allow all. Hold Alt while clicking to cycle through all generators.");
+        configuration.getCategory("general").remove("Lock World Generator");
         ConfigGeneralSettings.generalFlatWorldConfig = ConfigurationHelper.getString(
                 configuration,
                 "Flat World Config",
